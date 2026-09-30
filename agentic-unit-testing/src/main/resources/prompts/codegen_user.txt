@@ -1,0 +1,5 @@
+Implement the method described by the Javadoc below. Keep the class name, method name, parameter types and return type exactly as given.
+
+```java
+{{prompt}}
+```

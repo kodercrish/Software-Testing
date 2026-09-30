@@ -1,0 +1,15 @@
+The Test Executor ran your tests. Results:
+
+{{feedback}}
+
+Current SolutionTest.java:
+
+```java
+{{tests}}
+```
+
+Return the complete improved `SolutionTest` class in one Java code block.
+- Add tests that exercise the uncovered lines / branch outcomes listed above.
+- If a failing test's expected value contradicts the specification, fix that test. If it agrees with the
+  specification, keep it unchanged: it may have found a bug in the implementation.
+- Keep all existing passing tests.

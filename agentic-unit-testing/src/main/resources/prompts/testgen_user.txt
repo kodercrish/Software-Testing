@@ -1,0 +1,13 @@
+Specification of the method under test:
+
+```java
+{{prompt}}
+```
+
+Implementation under test (Solution.java, with line numbers):
+
+```
+{{numberedCode}}
+```
+
+Write the JUnit 5 class `SolutionTest`.
