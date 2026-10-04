@@ -10,48 +10,54 @@ import st.pipeline.llm.LlmClient;
 import st.pipeline.llm.LlmClient.Params;
 import st.pipeline.report.RunLogger;
 
+import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Map;
+import java.util.List;
+import java.util.Properties;
 
-/**
- * Entry point. Usage: java -jar target/pipeline.jar [key=value ...]
- * Example:        java -jar target/pipeline.jar tasks=0-4 criterion=STATEMENT
- */
+/** Entry point: runs the pipeline on the first 12 HumanEval-X Java problems. Usage: java -jar target/pipeline.jar */
 public class Main {
+    private static final int NUM_TASKS = 12;
+
     public static void main(String[] args) throws Exception {
-        Config cfg = new Config(Path.of("config.properties"), args);
-        Criterion criterion = Criterion.valueOf(cfg.get("criterion").toUpperCase());
-        double target = cfg.getDouble("target");
+        Properties cfg = new Properties();
+        try (Reader r = Files.newBufferedReader(Path.of("config.properties"))) {
+            cfg.load(r);
+        }
+        String apiKey = System.getenv("OPENROUTER_API_KEY");
+        if (apiKey == null || apiKey.isBlank()) throw new IllegalStateException("Set OPENROUTER_API_KEY");
+        Criterion criterion = Criterion.valueOf(cfg.getProperty("criterion"));
+        double target = Double.parseDouble(cfg.getProperty("target"));
 
-        LlmClient llm = new LlmClient(cfg.get("api.baseUrl"), cfg.apiKey(), cfg.get("model"),
-                cfg.list("fallbackModels"), cfg.getInt("seed"), cfg.getInt("requestDelayMs"));
-        var codeGen = new CodeGeneratorAgent(llm, new Params(cfg.getDouble("codegen.temperature"),
-                cfg.getDouble("codegen.topP"), cfg.getInt("codegen.maxTokens")));
-        var testGen = new TestGeneratorAgent(llm, new Params(cfg.getDouble("testgen.temperature"),
-                cfg.getDouble("testgen.topP"), cfg.getInt("testgen.maxTokens")), criterion, target);
-        var executor = new TestExecutorAgent(Path.of("tools"), cfg.getInt("execTimeoutSeconds"), criterion, target);
-        var logger = new RunLogger(Path.of(cfg.get("runsDir")), cfg.asProperties());
+        LlmClient llm = new LlmClient(cfg.getProperty("api.baseUrl"), apiKey, cfg.getProperty("model"),
+                Long.parseLong(cfg.getProperty("seed")));
+        var codeGen = new CodeGeneratorAgent(llm, params(cfg, "codegen"));
+        var testGen = new TestGeneratorAgent(llm, params(cfg, "testgen"), criterion, target);
+        var executor = new TestExecutorAgent(Path.of("tools"), criterion, target);
+        var logger = new RunLogger(Path.of("runs"));
         var pipeline = new Pipeline(codeGen, testGen, executor, logger,
-                cfg.getInt("maxCodeAttempts"), cfg.getInt("maxTestIterations"));
+                Integer.parseInt(cfg.getProperty("maxTestIterations")));
 
-        Map<Integer, Task> tasks = HumanEvalX.load(Path.of(cfg.get("dataset")));
-        System.out.printf("Model %s | goal: %s >= %.0f%% | run dir %s%n", cfg.get("model"), criterion, target, logger.runDir());
-        for (int id : cfg.taskIds()) {
-            Task task = tasks.get(id);
-            if (task == null) { System.out.println("No task " + id); continue; }
-            System.out.println("== " + task.id());
+        List<Task> tasks = HumanEvalX.load(Path.of("data/humaneval_java.jsonl")).subList(0, NUM_TASKS);
+        System.out.printf("Model %s | goal: %s coverage >= %.0f%% | output: %s%n",
+                cfg.getProperty("model"), criterion, target, logger.runDir());
+        for (Task task : tasks) {
+            System.out.println("== " + task.task_id());
             try {
                 Verdict v = pipeline.run(task);
                 System.out.println("  VERDICT: " + v.status());
             } catch (Exception e) {
-                // One failing task (e.g. exhausted rate limit) must not abort the whole run
+                // e.g. the free model stayed rate-limited: skip this task, continue with the next
                 System.out.println("  ERROR: " + e.getMessage());
-                Files.writeString(logger.taskDir(task.safeId()).resolve("error.log"), String.valueOf(e));
             }
         }
-        System.out.println();
         System.out.println(logger.writeSummary());
-        System.out.println("Results written to " + logger.runDir());
+    }
+
+    private static Params params(Properties cfg, String agent) {
+        return new Params(Double.parseDouble(cfg.getProperty(agent + ".temperature")),
+                Double.parseDouble(cfg.getProperty(agent + ".topP")),
+                Integer.parseInt(cfg.getProperty(agent + ".maxTokens")));
     }
 }

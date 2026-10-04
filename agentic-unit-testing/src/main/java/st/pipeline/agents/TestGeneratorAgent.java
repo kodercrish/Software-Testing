@@ -14,8 +14,6 @@ import java.util.Map;
 
 /** Agent 2: generates JUnit 5 tests that target a coverage criterion, and refines them using executor feedback. */
 public class TestGeneratorAgent {
-    public static final String NAME = "test-generator";
-
     private final LlmClient llm;
     private final Params params;
     private final String systemPrompt;
@@ -45,7 +43,7 @@ public class TestGeneratorAgent {
     }
 
     private Output ask(String user) throws Exception {
-        Call call = llm.chat(NAME, systemPrompt, user, params);
+        Call call = llm.chat("test-generator", systemPrompt, user, params);
         return new Output(Prompts.extractCode(call.response(), "SolutionTest"), call);
     }
 

@@ -4,50 +4,32 @@
 
 ## 1. Pipeline, dataset and test-generator functionality
 
-**Dataset.** HumanEval-X, Java split (164 problems). Each problem provides:
-- a `prompt`: imports, `class Solution`, a Javadoc specification with examples, and the method signature;
-- a `canonical_solution`;
-- official hidden tests (`class Main`).
+**Dataset.** HumanEval-X, Java split. We use the first 12 problems (Java/0 – Java/11). Each problem's `prompt` contains the imports, `class Solution`, a Javadoc specification with examples, and the method signature.
 
-We used tasks `<0–N>`.
+**Testing requirement: option (1), coverage criterion.** The user sets the criterion (`STATEMENT` or `BRANCH`) and a target percentage in `config.properties`. The test case generator must produce JUnit 5 tests that reach this coverage of the generated code, as measured by JaCoCo. We used BRANCH coverage with a 100% target: every decision (`if`, loop condition, `&&`, `||`, `?:`) must evaluate both to true and to false.
 
-**Testing requirement: option (1), coverage criterion.** The user picks the criterion (`STATEMENT` or `BRANCH`) and a target percentage in `config.properties`. The test generator must produce JUnit 5 tests that reach this coverage of the generated `Solution` class, as measured by JaCoCo.
-- STATEMENT is JaCoCo line coverage.
-- BRANCH is JaCoCo branch coverage, i.e. decision coverage: both outcomes of every `if`, loop condition, `&&`, `||`, `?:` and `switch`.
+**Agents.** The pipeline is plain Java: HTTP calls to OpenRouter and a loop. It uses no framework, no RAG and no chain-of-thought.
 
-**Agents.** The pipeline is plain Java code: HTTP calls to an OpenAI-compatible endpoint and a loop. It uses no framework, no RAG and no chain-of-thought.
-
-1. **Code Generator (LLM).**
-   - Input: the task `prompt`.
-   - Output: a complete `Solution.java`.
-   - If the code does not compile, the compiler errors are sent back, up to `maxCodeAttempts` times.
-2. **Test Case Generator (LLM).**
-   - Input: the specification and the generated code with line numbers.
-   - Output: `SolutionTest.java` (JUnit 5).
-   - Expected values must come from the *specification*, not from the code, so the tests can reveal bugs.
-   - In feedback rounds it receives the executor's report: lines never executed, decisions with untaken outcomes, failing tests with their messages, and compile errors. It then returns an improved suite.
-3. **Test Case Executor.**
-   - Compiles the code and tests, then runs them in a separate JVM using the JUnit Platform console launcher with the JaCoCo agent attached.
-   - Parses the JUnit and JaCoCo XML reports and produces the verdict.
-   - The loop stops when every test passes and the coverage target is met, or after `maxTestIterations` rounds. The best suite from all rounds is kept.
-   - It also runs (a) the official HumanEval-X tests on the generated code, which is the ground truth for code correctness, and (b) the generated tests on the canonical solution, which checks the test oracles. Neither result is shown to the LLM agents.
+1. **Code Generator (LLM).** Input: the problem `prompt`. Output: `Solution.java`.
+2. **Test Case Generator (LLM).** Input: the specification and the generated code with line numbers. Output: `SolutionTest.java`. Expected values must come from the specification, not from the code. In later rounds it also receives the executor's feedback (uncovered lines, decisions with untaken outcomes, failing tests, compile errors) and returns an improved test class.
+3. **Test Case Executor.** Compiles code and tests, runs the tests with the JUnit console launcher in a separate JVM with the JaCoCo agent attached, reads the JUnit and JaCoCo XML reports, and gives the verdict. The loop stops when all tests pass and the coverage target is met, or after `maxTestIterations` rounds.
 
 <Insert the pipeline diagram from README.md>
 
 ## 2. Prompts and settings
 
-| Setting | Code Generator | Test Generator |
+| Setting | Code Generator | Test Case Generator |
 |---|---|---|
-| Model | `<model>` via OpenRouter | same |
+| Model | `qwen/qwen3.8-27b:free` (OpenRouter) | same |
 | temperature | 0.2 | 0.4 |
 | top_p | 0.95 | 0.95 |
 | max_tokens | 2048 | 4096 |
 | seed | 42 | 42 |
-| Other | maxCodeAttempts = 2 | criterion = BRANCH, target = 100 %, maxTestIterations = 3 |
+| Other | – | criterion = BRANCH, target = 100%, maxTestIterations = 3 |
 
-The code generator uses a low temperature to get the most likely correct solution. The test generator uses a slightly higher temperature so that, in feedback rounds, it produces more varied inputs that can reach uncovered branches.
+The code generator uses a low temperature to get the most likely correct solution. The test generator uses a slightly higher one so that it tries more varied inputs when it must reach uncovered branches.
 
-Placeholders `{{...}}` are filled in at run time. The exact prompts sent for every call are logged in `runs/<ts>/Java_<id>/llm-calls.jsonl`.
+Placeholders `{{...}}` are filled in at run time. The exact prompts of every call are logged in `runs/<ts>/Java_<id>/llm-calls.jsonl`.
 
 **codegen_system.txt**
 
@@ -71,24 +53,6 @@ Implement the method described by the Javadoc below. Keep the class name, method
 ```java
 {{prompt}}
 ```
-```
-
-**codegen_fix.txt**
-
-```text
-Your previous code did not compile. Compiler output:
-
-```
-{{errors}}
-```
-
-Previous code:
-
-```java
-{{code}}
-```
-
-Return the corrected complete compilation unit in one Java code block.
 ```
 
 **testgen_system.txt**
@@ -151,22 +115,11 @@ Return the complete improved `SolutionTest` class in one Java code block.
 - Keep all existing passing tests.
 ```
 
-Example of the feedback produced by the Test Executor (task Java/0, after a weak first suite):
-
-```text
-Coverage: statements 1/6 (16.7%), branches 0/6 (0.0%)
-Lines never executed:
-  line 13: for (int i = 0; i < numbers.size(); i++) {
-  line 16: if (distance < threshold) return true;
-  line 19: return false;
-Tests: 1 run, 1 passed, 0 failed
-```
-
 ## 3. Formats of code, tests and verdict
 
-- **Code:** one Java compilation unit, `Solution.java`, containing `class Solution` with the required method. It has no package and no `main`.
-- **Tests:** one JUnit 5 compilation unit, `SolutionTest.java`, with one scenario per `@Test` method, using `assertEquals`, `assertTrue` and `assertFalse`.
-- **Verdict:** JSON (`verdict.json`), for example:
+- **Code:** one Java file, `Solution.java`, containing `class Solution` with the required method.
+- **Tests:** one JUnit 5 file, `SolutionTest.java`, with one scenario per `@Test` method.
+- **Verdict:** `verdict.json`, for example:
 
 ```json
 <paste runs/<ts>/Java_<id>/verdict.json>
@@ -184,24 +137,15 @@ Tests: 1 run, 1 passed, 0 failed
 <paste SolutionTest.java>
 ```
 
-## 4. Execution results (test generator + test executor)
+## 4. Execution results (test case generator and test case executor)
 
-<paste runs/<ts>/summary.md: per-task table and aggregate metrics>
+<paste runs/<ts>/summary.md>
 
-Metrics reported:
-- coverage goal met (%);
-- mean statement and branch coverage;
-- number of tasks with verdict PASS;
-- code correctness (pass@1 against the official tests);
-- buggy solutions caught by the generated tests;
-- test-oracle validity (generated tests passing on the canonical solution);
-- mean number of feedback iterations.
-
-<Add 3–5 lines of discussion: e.g. how coverage improved between iteration 1 and the final iteration, and which tasks failed and why.>
+<Add a few lines of discussion: e.g. which tasks needed feedback rounds, and why tasks did not reach the goal.>
 
 ## 5. Contributions
 
 | Member | Contribution |
 |---|---|
-| <Member 1> | <e.g. LLM client, code and test generator agents, prompt design> |
-| <Member 2> | <e.g. test executor (JUnit/JaCoCo), feedback loop, experiments, report> |
+| <Member 1> | <...> |
+| <Member 2> | <...> |
