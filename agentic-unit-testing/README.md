@@ -1,5 +1,7 @@
 # Agentic AI Unit-Testing Pipeline (CSE731 Mid-term)
 
+**Team:** Krish Patel (IMT2023134), Yash Gupta (IMT2023125)
+
 A pipeline of three agents, written in plain Java, that runs on the first 12 problems of **HumanEval-X (Java)**:
 
 1. **Code Generator (LLM):** writes the method described in the problem.

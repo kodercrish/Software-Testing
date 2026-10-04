@@ -1,6 +1,6 @@
 # CSE731 Mid-term Project Report: Agentic AI Pipeline for Coverage-Directed Unit Testing
 
-**Team:** <Member 1 (Roll no.)>, <Member 2 (Roll no.)>
+**Team:** Krish Patel (IMT2023134), Yash Gupta (IMT2023125)
 
 ## 1. Pipeline, dataset and test-generator functionality
 
@@ -12,9 +12,13 @@
 
 1. **Code Generator (LLM).** Input: the problem `prompt`. Output: `Solution.java`.
 2. **Test Case Generator (LLM).** Input: the specification and the generated code with line numbers. Output: `SolutionTest.java`. Expected values must come from the specification, not from the code. In later rounds it also receives the executor's feedback (uncovered lines, decisions with untaken outcomes, failing tests, compile errors) and returns an improved test class.
-3. **Test Case Executor.** Compiles code and tests, runs the tests with the JUnit console launcher in a separate JVM with the JaCoCo agent attached, reads the JUnit and JaCoCo XML reports, and gives the verdict. The loop stops when all tests pass and the coverage target is met, or after `maxTestIterations` rounds.
+3. **Test Case Executor.** Compiles code and tests, runs the tests with the JUnit console launcher in a separate JVM with the JaCoCo agent attached, reads the JUnit and JaCoCo XML reports, and gives the verdict. The loop stops when all tests pass and the coverage target is met, when the generated code itself does not compile (better tests cannot fix that), or after `maxTestIterations` rounds.
 
-<Insert the pipeline diagram from README.md>
+```
+ problem spec ─► [1 Code Generator] ─► Solution.java ─► [2 Test Generator] ─► SolutionTest.java ─► [3 Test Executor] ─► verdict
+                                                              ▲                                          │
+                                                              └──── uncovered lines / failures ◄─────────┘
+```
 
 ## 2. Prompts and settings
 
@@ -145,7 +149,9 @@ Return the complete improved `SolutionTest` class in one Java code block.
 
 ## 5. Contributions
 
-| Member | Contribution |
-|---|---|
-| <Member 1> | <...> |
-| <Member 2> | <...> |
+The work was split into two parts: the LLM side of the pipeline (agents 1 and 2) and the execution side (agent 3, results and report).
+
+| Member | Part | Contribution |
+|---|---|---|
+| Yash Gupta (IMT2023125) | Part 1: LLM agents and orchestration | OpenRouter client (`LlmClient`), Code Generator agent, Test Case Generator agent including the feedback message, prompt templates and sampling settings (`Prompts`, `config.properties`), dataset loader (`HumanEvalX`), and the pipeline loop (`Pipeline`, `Main`) |
+| Krish Patel (IMT2023134) | Part 2: Test execution, results and report | Test Case Executor agent (compiling and running tests with JUnit and JaCoCo, verdict), process runner (`Proc`), JUnit/JaCoCo report parsing (`Reports`), run logging and results summary (`RunLogger`), running the experiments on the 12 tasks, and writing this report |
