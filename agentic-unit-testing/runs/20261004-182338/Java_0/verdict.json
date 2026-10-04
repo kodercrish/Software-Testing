@@ -1,0 +1,11 @@
+{
+  "taskId": "Java/0",
+  "status": "COMPILE_ERROR",
+  "testsTotal": 0,
+  "testsPassed": 0,
+  "criterion": "BRANCH",
+  "target": 100.0,
+  "statementPct": 0.0,
+  "branchPct": 0.0,
+  "iterations": 3
+}

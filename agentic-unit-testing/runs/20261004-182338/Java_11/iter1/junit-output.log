@@ -1,0 +1,57 @@
+[36m╷[0m
+[36m├─[0m [36mJUnit Platform Suite[0m [32m✔[0m
+[36m├─[0m [36mJUnit Jupiter[0m [32m✔[0m
+[36m│  └─[0m [36mSolutionTest[0m [32m✔[0m
+[36m│     ├─[0m [31mtestFirstLonger()[0m [31m✘[0m [31mexpected: <1010> but was: <1001>[0m
+[36m│     ├─[0m [34mtestEqualLengthBothOnes()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestSingleCharDifferent()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestOneEmpty()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestBothEmpty()[0m [32m✔[0m
+[36m│     ├─[0m [31mtestSecondLonger()[0m [31m✘[0m [31mexpected: <1010> but was: <1001>[0m
+[36m│     ├─[0m [34mtestEqualLengthMixed()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestSingleCharSame()[0m [32m✔[0m
+[36m│     └─[0m [34mtestEqualLengthBothZeros()[0m [32m✔[0m
+[36m└─[0m [36mJUnit Vintage[0m [32m✔[0m
+
+Failures (2):
+  JUnit Jupiter:SolutionTest:testFirstLonger()
+    MethodSource [className = 'SolutionTest', methodName = 'testFirstLonger', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: expected: <1010> but was: <1001>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+       org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+       org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+       SolutionTest.testFirstLonger(SolutionTest.java:27)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:SolutionTest:testSecondLonger()
+    MethodSource [className = 'SolutionTest', methodName = 'testSecondLonger', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: expected: <1010> but was: <1001>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+       org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+       org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+       SolutionTest.testSecondLonger(SolutionTest.java:33)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+Test run finished after 305 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         9 tests found           ]
+[         0 tests skipped         ]
+[         9 tests started         ]
+[         0 tests aborted         ]
+[         7 tests successful      ]
+[         2 tests failed          ]
+

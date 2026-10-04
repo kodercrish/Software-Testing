@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="13" skipped="0" failures="4" errors="0" time="0.122" hostname="krish-Inspiron-15-3520" timestamp="2026-10-04T18:23:51">
+<properties>
+<property name="file.encoding" value="UTF-8"/>
+<property name="file.separator" value="/"/>
+<property name="java.class.path" value="/mnt/newstorage/IIITB/7th semester/ST/midterm_project/agentic-unit-testing/tools/junit-console.jar"/>
+<property name="java.class.version" value="65.0"/>
+<property name="java.home" value="/usr/lib/jvm/java-21-openjdk-amd64"/>
+<property name="java.io.tmpdir" value="/tmp"/>
+<property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
+<property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+<property name="java.runtime.version" value="21.0.12.1+1-1-24.04.4-Ubuntu"/>
+<property name="java.specification.name" value="Java Platform API Specification"/>
+<property name="java.specification.vendor" value="Oracle Corporation"/>
+<property name="java.specification.version" value="21"/>
+<property name="java.vendor" value="Ubuntu"/>
+<property name="java.vendor.url" value="https://ubuntu.com/"/>
+<property name="java.vendor.url.bug" value="https://bugs.launchpad.net/ubuntu/+source/openjdk-21"/>
+<property name="java.version" value="21.0.12.1"/>
+<property name="java.version.date" value="2026-08-18"/>
+<property name="java.vm.compressedOopsMode" value="Zero based"/>
+<property name="java.vm.info" value="mixed mode, sharing"/>
+<property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+<property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+<property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<property name="java.vm.specification.version" value="21"/>
+<property name="java.vm.vendor" value="Ubuntu"/>
+<property name="java.vm.version" value="21.0.12.1+1-1-24.04.4-Ubuntu"/>
+<property name="jdk.debug" value="release"/>
+<property name="junit.docs.version" value="1.11.4"/>
+<property name="line.separator" value="&#10;"/>
+<property name="native.encoding" value="UTF-8"/>
+<property name="os.arch" value="amd64"/>
+<property name="os.name" value="Linux"/>
+<property name="os.version" value="6.8.0-139-generic"/>
+<property name="path.separator" value=":"/>
+<property name="stderr.encoding" value="UTF-8"/>
+<property name="stdout.encoding" value="UTF-8"/>
+<property name="sun.arch.data.model" value="64"/>
+<property name="sun.boot.library.path" value="/usr/lib/jvm/java-21-openjdk-amd64/lib"/>
+<property name="sun.cpu.endian" value="little"/>
+<property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+<property name="sun.java.command" value="/mnt/newstorage/IIITB/7th semester/ST/midterm_project/agentic-unit-testing/tools/junit-console.jar execute --disable-banner --details=tree --class-path /mnt/newstorage/IIITB/7th semester/ST/midterm_project/agentic-unit-testing/runs/20261004-182338/Java_0/iter2/out/main:/mnt/newstorage/IIITB/7th semester/ST/midterm_project/agentic-unit-testing/runs/20261004-182338/Java_0/iter2/out/test --select-class SolutionTest --reports-dir /mnt/newstorage/IIITB/7th semester/ST/midterm_project/agentic-unit-testing/runs/20261004-182338/Java_0/iter2/junit"/>
+<property name="sun.java.launcher" value="SUN_STANDARD"/>
+<property name="sun.jnu.encoding" value="UTF-8"/>
+<property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+<property name="user.country" value="IN"/>
+<property name="user.dir" value="/mnt/newstorage/IIITB/7th semester/ST/midterm_project/agentic-unit-testing/runs/20261004-182338/Java_0/iter2"/>
+<property name="user.home" value="/home/krish"/>
+<property name="user.language" value="en"/>
+<property name="user.name" value="krish"/>
+<property name="user.timezone" value="Asia/Kolkata"/>
+</properties>
+<testcase name="testEmptyList()" classname="SolutionTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:SolutionTest]/[method:testEmptyList()]
+display-name: testEmptyList()
+]]></system-out>
+</testcase>
+<testcase name="testNoCloseElements()" classname="SolutionTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:SolutionTest]/[method:testNoCloseElements()]
+display-name: testNoCloseElements()
+]]></system-out>
+</testcase>
+<testcase name="testExactThresholdNotLess()" classname="SolutionTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:SolutionTest]/[method:testExactThresholdNotLess()]
+display-name: testExactThresholdNotLess()
+]]></system-out>
+</testcase>
+<testcase name="testThresholdZeroWithCloseNegativeNumbers()" classname="SolutionTest" time="0.002">
+<failure message="expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
+	at SolutionTest.testThresholdZeroWithCloseNegativeNumbers(SolutionTest.java:76)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></failure>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:SolutionTest]/[method:testThresholdZeroWithCloseNegativeNumbers()]
+display-name: testThresholdZeroWithCloseNegativeNumbers()
+]]></system-out>
+</testcase>
+<testcase name="testThresholdZeroWithCloseMoreThanTwoDuplicates()" classname="SolutionTest" time="0.001">
+<failure message="expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
+	at SolutionTest.testThresholdZeroWithCloseMoreThanTwoDuplicates(SolutionTest.java:82)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></failure>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:SolutionTest]/[method:testThresholdZeroWithCloseMoreThanTwoDuplicates()]
+display-name: testThresholdZeroWithCloseMoreThanTwoDuplicates()
+]]></system-out>
+</testcase>
+<testcase name="testNullList()" classname="SolutionTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:SolutionTest]/[method:testNullList()]
+display-name: testNullList()
+]]></system-out>
+</testcase>
+<testcase name="testUnsortedInputWithClose()" classname="SolutionTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:SolutionTest]/[method:testUnsortedInputWithClose()]
+display-name: testUnsortedInputWithClose()
+]]></system-out>
+</testcase>
+<testcase name="testThresholdZeroWithCloseDifferentValues()" classname="SolutionTest" time="0.01">
+<failure message="expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
+	at SolutionTest.testThresholdZeroWithCloseDifferentValues(SolutionTest.java:70)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></failure>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:SolutionTest]/[method:testThresholdZeroWithCloseDifferentValues()]
+display-name: testThresholdZeroWithCloseDifferentValues()
+]]></system-out>
+</testcase>
+<testcase name="testThresholdZeroNoClose()" classname="SolutionTest" time="0.028">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:SolutionTest]/[method:testThresholdZeroNoClose()]
+display-name: testThresholdZeroNoClose()
+]]></system-out>
+</testcase>
+<testcase name="testCloseElementsFound()" classname="SolutionTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:SolutionTest]/[method:testCloseElementsFound()]
+display-name: testCloseElementsFound()
+]]></system-out>
+</testcase>
+<testcase name="testThresholdZeroWithClose()" classname="SolutionTest" time="0.001">
+<failure message="expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
+	at SolutionTest.testThresholdZeroWithClose(SolutionTest.java:46)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></failure>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:SolutionTest]/[method:testThresholdZeroWithClose()]
+display-name: testThresholdZeroWithClose()
+]]></system-out>
+</testcase>
+<testcase name="testNegativeThreshold()" classname="SolutionTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:SolutionTest]/[method:testNegativeThreshold()]
+display-name: testNegativeThreshold()
+]]></system-out>
+</testcase>
+<testcase name="testSingleElementList()" classname="SolutionTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:SolutionTest]/[method:testSingleElementList()]
+display-name: testSingleElementList()
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>

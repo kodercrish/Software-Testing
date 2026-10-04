@@ -1,0 +1,27 @@
+[36m╷[0m
+[36m├─[0m [36mJUnit Platform Suite[0m [32m✔[0m
+[36m├─[0m [36mJUnit Jupiter[0m [32m✔[0m
+[36m│  └─[0m [36mSolutionTest[0m [32m✔[0m
+[36m│     ├─[0m [34mtestSingleElement()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestMixedPositiveAndNegative()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestEmptyList()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestExampleFromJavadoc()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestAllEqualElements()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestNullInput()[0m [32m✔[0m
+[36m│     └─[0m [34mtestNegativeNumbers()[0m [32m✔[0m
+[36m└─[0m [36mJUnit Vintage[0m [32m✔[0m
+
+Test run finished after 262 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         7 tests found           ]
+[         0 tests skipped         ]
+[         7 tests started         ]
+[         0 tests aborted         ]
+[         7 tests successful      ]
+[         0 tests failed          ]
+

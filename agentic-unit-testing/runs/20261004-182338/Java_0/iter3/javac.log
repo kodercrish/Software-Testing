@@ -1,0 +1,13 @@
+/mnt/newstorage/IIITB/7th semester/ST/midterm_project/agentic-unit-testing/runs/20261004-182338/Java_0/iter3/src/SolutionTest.java:86: error: method testThresholdZeroWithClose() is already defined in class SolutionTest
+    void testThresholdZeroWithClose() {
+         ^
+/mnt/newstorage/IIITB/7th semester/ST/midterm_project/agentic-unit-testing/runs/20261004-182338/Java_0/iter3/src/SolutionTest.java:92: error: method testThresholdZeroWithCloseDifferentValues() is already defined in class SolutionTest
+    void testThresholdZeroWithCloseDifferentValues() {
+         ^
+/mnt/newstorage/IIITB/7th semester/ST/midterm_project/agentic-unit-testing/runs/20261004-182338/Java_0/iter3/src/SolutionTest.java:98: error: method testThresholdZeroWithCloseNegativeNumbers() is already defined in class SolutionTest
+    void testThresholdZeroWithCloseNegativeNumbers() {
+         ^
+/mnt/newstorage/IIITB/7th semester/ST/midterm_project/agentic-unit-testing/runs/20261004-182338/Java_0/iter3/src/SolutionTest.java:104: error: method testThresholdZeroWithCloseMoreThanTwoDuplicates() is already defined in class SolutionTest
+    void testThresholdZeroWithCloseMoreThanTwoDuplicates() {
+         ^
+4 errors

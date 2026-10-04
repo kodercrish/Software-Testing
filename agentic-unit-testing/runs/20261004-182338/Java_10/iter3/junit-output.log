@@ -1,0 +1,46 @@
+[36m╷[0m
+[36m├─[0m [36mJUnit Platform Suite[0m [32m✔[0m
+[36m├─[0m [36mJUnit Jupiter[0m [32m✔[0m
+[36m│  └─[0m [36mSolutionTest[0m [32m✔[0m
+[36m│     ├─[0m [34mtestMakePalindromeSingleCharacter()[0m [32m✔[0m
+[36m│     ├─[0m [31mtestMakePalindromeLoopIteratesAtLeastTwoTimes()[0m [31m✘[0m [31mexpected: <ababa> but was: <aba>[0m
+[36m│     ├─[0m [34mtestMakePalindromeEmptyString()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestMakePalindromeLoopEnteredAndExitedNormally()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestMakePalindromeNoPalindromicSuffixExceptLastChar()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestMakePalindromePalindromicSuffixInMiddle()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestMakePalindromeLoopIteratesExactlyOnce()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestMakePalindromePalindromicSuffixOfLengthTwo()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestMakePalindromeNullInput()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestMakePalindromeAlreadyPalindrome()[0m [32m✔[0m
+[36m│     └─[0m [34mtestMakePalindromeLoopNotEntered()[0m [32m✔[0m
+[36m└─[0m [36mJUnit Vintage[0m [32m✔[0m
+
+Failures (1):
+  JUnit Jupiter:SolutionTest:testMakePalindromeLoopIteratesAtLeastTwoTimes()
+    MethodSource [className = 'SolutionTest', methodName = 'testMakePalindromeLoopIteratesAtLeastTwoTimes', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: expected: <ababa> but was: <aba>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+       org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+       org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+       SolutionTest.testMakePalindromeLoopIteratesAtLeastTwoTimes(SolutionTest.java:63)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+Test run finished after 384 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[        11 tests found           ]
+[         0 tests skipped         ]
+[        11 tests started         ]
+[         0 tests aborted         ]
+[        10 tests successful      ]
+[         1 tests failed          ]
+

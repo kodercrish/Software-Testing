@@ -24,14 +24,15 @@
 
 | Setting | Code Generator | Test Case Generator |
 |---|---|---|
-| Model | `qwen/qwen3.8-27b:free` (OpenRouter) | same |
+| Model | `nvidia/nemotron-3-super-120b-a12b:free` (OpenRouter) | same |
+| reasoning | disabled | disabled |
 | temperature | 0.2 | 0.4 |
 | top_p | 0.95 | 0.95 |
 | max_tokens | 2048 | 4096 |
 | seed | 42 | 42 |
 | Other | – | criterion = BRANCH, target = 100%, maxTestIterations = 3 |
 
-The code generator uses a low temperature to get the most likely correct solution. The test generator uses a slightly higher one so that it tries more varied inputs when it must reach uncovered branches.
+The model's built-in reasoning ("thinking") mode is switched off in every request (`"reasoning": {"enabled": false}`), so it answers directly without a hidden chain of thought, as the project rules require. The code generator uses a low temperature to get the most likely correct solution. The test generator uses a slightly higher one so that it tries more varied inputs when it must reach uncovered branches.
 
 Placeholders `{{...}}` are filled in at run time. The exact prompts of every call are logged in `runs/<ts>/Java_<id>/llm-calls.jsonl`.
 
@@ -126,26 +127,161 @@ Return the complete improved `SolutionTest` class in one Java code block.
 - **Verdict:** `verdict.json`, for example:
 
 ```json
-<paste runs/<ts>/Java_<id>/verdict.json>
+{
+  "taskId": "Java/11",
+  "status": "PASS",
+  "testsTotal": 9,
+  "testsPassed": 9,
+  "criterion": "BRANCH",
+  "target": 100.0,
+  "statementPct": 100.0,
+  "branchPct": 100.0,
+  "iterations": 2
+}
 ```
 
-**Sample generated code (Java/<id>):**
+**Sample generated code (Java/11, `stringXor`):**
 
 ```java
-<paste Solution.java>
+import java.util.*;
+import java.lang.*;
+
+class Solution {
+    /**
+    Input are two strings a and b consisting only of 1s and 0s.
+    Perform binary XOR on these inputs and return result also as a string.
+    >>> stringXor("010", "110")
+    "100"
+     */
+    public String stringXor(String a, String b) {
+        StringBuilder result = new StringBuilder();
+        int length = Math.max(a.length(), b.length());
+        for (int i = 0; i < length; i++) {
+            char bitA = i < a.length() ? a.charAt(a.length() - 1 - i) : '0';
+            char bitB = i < b.length() ? b.charAt(b.length() - 1 - i) : '0';
+            char xorBit = (bitA == bitB) ? '0' : '1';
+            result.insert(0, xorBit);
+        }
+        return result.toString();
+    }
+}
 ```
 
-**Sample generated tests (Java/<id>):**
+**Sample generated tests (Java/11, final round):**
 
 ```java
-<paste SolutionTest.java>
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class SolutionTest {
+    @Test
+    void testEqualLengthBothZeros() {
+        Solution sol = new Solution();
+        assertEquals("000", sol.stringXor("000", "000"));
+    }
+
+    @Test
+    void testEqualLengthBothOnes() {
+        Solution sol = new Solution();
+        assertEquals("000", sol.stringXor("111", "111"));
+    }
+
+    @Test
+    void testEqualLengthMixed() {
+        Solution sol = new Solution();
+        assertEquals("110", sol.stringXor("101", "011"));
+    }
+
+    @Test
+    void testFirstLonger() {
+        Solution sol = new Solution();
+        assertEquals("1001", sol.stringXor("1100", "101"));
+    }
+
+    @Test
+    void testSecondLonger() {
+        Solution sol = new Solution();
+        assertEquals("1001", sol.stringXor("101", "1100"));
+    }
+
+    @Test
+    void testOneEmpty() {
+        Solution sol = new Solution();
+        assertEquals("101", sol.stringXor("", "101"));
+    }
+
+    @Test
+    void testBothEmpty() {
+        Solution sol = new Solution();
+        assertEquals("", sol.stringXor("", ""));
+    }
+
+    @Test
+    void testSingleCharDifferent() {
+        Solution sol = new Solution();
+        assertEquals("1", sol.stringXor("0", "1"));
+    }
+
+    @Test
+    void testSingleCharSame() {
+        Solution sol = new Solution();
+        assertEquals("0", sol.stringXor("1", "1"));
+    }
+}
 ```
 
 ## 4. Execution results (test case generator and test case executor)
 
-<paste runs/<ts>/summary.md>
+Run of 4 October 2026 on tasks Java/0 – Java/11 (criterion BRANCH, target 100%, at most 3 rounds). All files are in `runs/20261004-182338/`.
 
-<Add a few lines of discussion: e.g. which tasks needed feedback rounds, and why tasks did not reach the goal.>
+| Task | Verdict | Tests passed | Statement % | Branch % | Iterations |
+|---|---|---|---|---|---|
+| Java/0 | COMPILE_ERROR | 0/0 | 0.0 | 0.0 | 3 |
+| Java/1 | TESTS_FAILED | 13/16 | 100.0 | 83.3 | 3 |
+| Java/2 | PASS | 4/4 | 100.0 | 100.0 | 1 |
+| Java/3 | PASS | 6/6 | 100.0 | 100.0 | 1 |
+| Java/4 | PASS | 7/7 | 100.0 | 100.0 | 1 |
+| Java/5 | PASS | 5/5 | 100.0 | 100.0 | 1 |
+| Java/6 | COVERAGE_NOT_MET | 9/9 | 100.0 | 93.8 | 3 |
+| Java/7 | PASS | 5/5 | 100.0 | 100.0 | 1 |
+| Java/8 | PASS | 5/5 | 100.0 | 100.0 | 1 |
+| Java/9 | PASS | 8/8 | 100.0 | 100.0 | 1 |
+| Java/10 | TESTS_FAILED | 10/11 | 100.0 | 91.7 | 3 |
+| Java/11 | PASS | 9/9 | 100.0 | 100.0 | 2 |
+
+Coverage goal reached with all tests passing: 8/12 tasks
+
+Console output of the test case executor per round:
+
+```
+Java/0   iter 1: 9/10 pass, 100.0%   iter 2: 9/13 pass, 100.0%   iter 3: does not compile
+Java/1   iter 1: 8/8 pass, 83.3%     iter 2: 10/12 pass, 83.3%   iter 3: 13/16 pass, 83.3%
+Java/6   iter 1: 7/7 pass, 93.8%     iter 2: 8/8 pass, 93.8%     iter 3: 9/9 pass, 93.8%
+Java/10  iter 1: 7/7 pass, 91.7%     iter 2: 9/9 pass, 91.7%     iter 3: 10/11 pass, 91.7%
+Java/11  iter 1: 7/9 pass, 100.0%    iter 2: 9/9 pass, 100.0%
+(all other tasks: PASS in iteration 1)
+```
+
+Feedback sent to the test case generator after round 1 of Java/11:
+
+```text
+Coverage: statements 9/9 (100.0%), branches 8/8 (100.0%)
+Tests: 9 run, 7 passed, 2 failed
+  FAILED testFirstLonger(): expected: <1010> but was: <1001>
+  FAILED testSecondLonger(): expected: <1010> but was: <1001>
+```
+
+**Discussion.**
+
+- **8/12 tasks reached 100% branch coverage with all tests passing.** 7 of them did so in the first round, and every task reached 100% statement coverage, except Java/0, whose final round did not compile.
+- **The feedback loop repaired wrong tests.** In Java/11 the first suite had full coverage, but 2 tests expected wrong XOR results for inputs of different lengths. After the executor reported the failures, the generator corrected them and the task passed in round 2.
+- **Infeasible branches (Java/1, Java/6, Java/10).** The remaining uncovered branch outcomes cannot be reached by any input that satisfies the specification:
+  - in Java/1 and Java/6, the false outcome of `else if (c == ')')` needs a character that is neither `(` nor `)`, but the input contains only parentheses and spaces;
+  - in Java/10, the exit condition of the `for` loop is never reached, because the last character on its own is always a palindromic suffix, so the loop always returns early.
+
+  Trying to cover these branches, the generator invented invalid inputs (e.g. unbalanced parentheses) with guessed expected values, which then failed. This shows a limit of structural coverage criteria: 100% branch coverage is not always achievable, and an LLM cannot tell an infeasible branch from a hard one.
+- **Wrong oracles.** Some failing tests had expected values that contradict the specification. In Java/0 the test `testThresholdZeroWithClose` expects `true` for threshold 0, although no difference can be smaller than 0. In Java/10, `makePalindrome("ab")` is expected to be `"ababa"` instead of `"aba"`. Execution caught these, not the LLM.
+- **Regression across rounds (Java/0).** Round 1 already had 100% coverage with one wrong test. In round 3 the generator produced duplicate test-method names, so the suite no longer compiled. Because the pipeline reports the last round, the final verdict is `COMPILE_ERROR`.
 
 ## 5. Contributions
 

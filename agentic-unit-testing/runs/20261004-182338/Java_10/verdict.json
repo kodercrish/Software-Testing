@@ -1,0 +1,11 @@
+{
+  "taskId": "Java/10",
+  "status": "TESTS_FAILED",
+  "testsTotal": 11,
+  "testsPassed": 10,
+  "criterion": "BRANCH",
+  "target": 100.0,
+  "statementPct": 100.0,
+  "branchPct": 91.7,
+  "iterations": 3
+}

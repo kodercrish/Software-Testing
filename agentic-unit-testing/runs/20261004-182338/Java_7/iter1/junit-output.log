@@ -1,0 +1,25 @@
+[36m╷[0m
+[36m├─[0m [36mJUnit Platform Suite[0m [32m✔[0m
+[36m├─[0m [36mJUnit Jupiter[0m [32m✔[0m
+[36m│  └─[0m [36mSolutionTest[0m [32m✔[0m
+[36m│     ├─[0m [34mfilterBySubstring_nullSubstring_throwsNPE()[0m [32m✔[0m
+[36m│     ├─[0m [34mfilterBySubstring_emptyList_returnsEmptyList()[0m [32m✔[0m
+[36m│     ├─[0m [34mfilterBySubstring_allMatch_returnsAll()[0m [32m✔[0m
+[36m│     ├─[0m [34mfilterBySubstring_someMatch_returnsFiltered()[0m [32m✔[0m
+[36m│     └─[0m [34mfilterBySubstring_noMatches_returnsEmptyList()[0m [32m✔[0m
+[36m└─[0m [36mJUnit Vintage[0m [32m✔[0m
+
+Test run finished after 173 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         5 tests found           ]
+[         0 tests skipped         ]
+[         5 tests started         ]
+[         0 tests aborted         ]
+[         5 tests successful      ]
+[         0 tests failed          ]
+

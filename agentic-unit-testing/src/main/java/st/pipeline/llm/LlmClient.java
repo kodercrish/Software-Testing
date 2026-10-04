@@ -46,6 +46,7 @@ public class LlmClient {
                 "top_p", p.topP(),
                 "max_tokens", p.maxTokens(),
                 "seed", seed,
+                "reasoning", Map.of("enabled", false), // no hidden chain-of-thought: the model answers directly
                 "messages", List.of(
                         Map.of("role", "system", "content", systemPrompt),
                         Map.of("role", "user", "content", userPrompt)));

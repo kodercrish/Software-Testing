@@ -1,0 +1,11 @@
+{
+  "taskId": "Java/6",
+  "status": "COVERAGE_NOT_MET",
+  "testsTotal": 9,
+  "testsPassed": 9,
+  "criterion": "BRANCH",
+  "target": 100.0,
+  "statementPct": 100.0,
+  "branchPct": 93.8,
+  "iterations": 3
+}

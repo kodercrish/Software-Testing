@@ -1,0 +1,87 @@
+[36m╷[0m
+[36m├─[0m [36mJUnit Platform Suite[0m [32m✔[0m
+[36m├─[0m [36mJUnit Jupiter[0m [32m✔[0m
+[36m│  └─[0m [36mSolutionTest[0m [32m✔[0m
+[36m│     ├─[0m [34mtestThresholdZeroNoClose()[0m [32m✔[0m
+[36m│     ├─[0m [31mtestThresholdZeroWithCloseDifferentValues()[0m [31m✘[0m [31mexpected: <true> but was: <false>[0m
+[36m│     ├─[0m [34mtestNullList()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestEmptyList()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestSingleElementList()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestUnsortedInputWithClose()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestNoCloseElements()[0m [32m✔[0m
+[36m│     ├─[0m [34mtestCloseElementsFound()[0m [32m✔[0m
+[36m│     ├─[0m [31mtestThresholdZeroWithCloseNegativeNumbers()[0m [31m✘[0m [31mexpected: <true> but was: <false>[0m
+[36m│     ├─[0m [34mtestExactThresholdNotLess()[0m [32m✔[0m
+[36m│     ├─[0m [31mtestThresholdZeroWithClose()[0m [31m✘[0m [31mexpected: <true> but was: <false>[0m
+[36m│     ├─[0m [34mtestNegativeThreshold()[0m [32m✔[0m
+[36m│     └─[0m [31mtestThresholdZeroWithCloseMoreThanTwoDuplicates()[0m [31m✘[0m [31mexpected: <true> but was: <false>[0m
+[36m└─[0m [36mJUnit Vintage[0m [32m✔[0m
+
+Failures (4):
+  JUnit Jupiter:SolutionTest:testThresholdZeroWithCloseDifferentValues()
+    MethodSource [className = 'SolutionTest', methodName = 'testThresholdZeroWithCloseDifferentValues', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+       org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+       org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+       org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
+       org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
+       SolutionTest.testThresholdZeroWithCloseDifferentValues(SolutionTest.java:70)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:SolutionTest:testThresholdZeroWithCloseNegativeNumbers()
+    MethodSource [className = 'SolutionTest', methodName = 'testThresholdZeroWithCloseNegativeNumbers', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+       org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+       org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+       org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
+       org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
+       SolutionTest.testThresholdZeroWithCloseNegativeNumbers(SolutionTest.java:76)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:SolutionTest:testThresholdZeroWithClose()
+    MethodSource [className = 'SolutionTest', methodName = 'testThresholdZeroWithClose', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+       org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+       org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+       org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
+       org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
+       SolutionTest.testThresholdZeroWithClose(SolutionTest.java:46)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:SolutionTest:testThresholdZeroWithCloseMoreThanTwoDuplicates()
+    MethodSource [className = 'SolutionTest', methodName = 'testThresholdZeroWithCloseMoreThanTwoDuplicates', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+       org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+       org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+       org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
+       org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
+       SolutionTest.testThresholdZeroWithCloseMoreThanTwoDuplicates(SolutionTest.java:82)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+Test run finished after 314 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[        13 tests found           ]
+[         0 tests skipped         ]
+[        13 tests started         ]
+[         0 tests aborted         ]
+[         9 tests successful      ]
+[         4 tests failed          ]
+
